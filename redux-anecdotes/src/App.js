@@ -7,6 +7,13 @@ class App extends React.Component {
     this.props.store.dispatch(actionFor.vote(id))
   }
 
+  addAnecdote = () => (event) => {
+    event.preventDefault()
+    const content = event.target.anecdote.value
+    this.props.store.dispatch(actionFor.addAnecdote(content))
+    event.target.anecdote.value = ''
+  }
+
   render() {
     const anecdotes = this.props.store.getState()
 
@@ -30,8 +37,8 @@ class App extends React.Component {
         <h2>Anecdotes</h2>
         {renderAnecdotes()}
         <h2>create new</h2>
-        <form>
-          <div><input /></div>
+        <form onSubmit={this.addAnecdote()}>
+          <div><input name='anecdote' /></div>
           <button>create</button>
         </form>
       </div>
