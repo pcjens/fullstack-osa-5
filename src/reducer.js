@@ -1,3 +1,5 @@
+import { createStore } from 'redux'
+
 const initialState = {
   good: 0,
   ok: 0,
@@ -15,9 +17,14 @@ const counterReducer = (state = initialState, action) => {
   case 'BAD':
     const worseState = { ...state, bad: state.bad + 1 }
     return worseState
+  case 'ZERO':
+    const zeroState = { ...initialState }
+    return zeroState
   default:
     return state
   }
 }
 
-export default counterReducer
+const counterStore = createStore(counterReducer)
+
+export default { counterReducer, counterStore }
